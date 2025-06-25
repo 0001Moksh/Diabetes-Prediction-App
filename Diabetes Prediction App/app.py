@@ -1,4 +1,3 @@
-# app.py
 import streamlit as st
 import joblib
 import numpy as np
@@ -6,17 +5,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Load model
 model = joblib.load('diabetes_model.pkl')
 
-# Set page config
 st.set_page_config(
     page_title="Diabetes Prediction App",
     page_icon="🩺",
     layout="wide"
 )
 
-# Custom CSS
 st.markdown("""
 <style>
     .reportview-container {
@@ -43,18 +39,15 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Title and description
 st.title("🩺 Diabetes Prediction App")
 st.markdown("""
 This app predicts the likelihood of diabetes using the PIMA Indian Diabetes dataset. 
 The model is trained on diagnostic measurements including glucose levels, BMI, age, and other health indicators.
 """)
 
-# Sidebar for user input
 st.sidebar.header("Patient Parameters")
 st.sidebar.markdown("Adjust the sliders to input patient health metrics")
 
-# Input fields
 pregnancies = st.sidebar.slider('Pregnancies', 0, 17, 3)
 glucose = st.sidebar.slider('Glucose Level (mg/dL)', 0, 200, 120)
 blood_pressure = st.sidebar.slider('Blood Pressure (mm Hg)', 0, 130, 70)
@@ -64,7 +57,6 @@ bmi = st.sidebar.slider('BMI', 0.0, 70.0, 25.0)
 dpf = st.sidebar.slider('Diabetes Pedigree Function', 0.0, 2.5, 0.35)
 age = st.sidebar.slider('Age', 20, 90, 30)
 
-# Prediction function
 def predict():
     input_data = np.array([[
         pregnancies, glucose, blood_pressure, 
@@ -74,7 +66,6 @@ def predict():
     probabilities = model.predict_proba(input_data)[0]
     return prediction, probabilities
 
-# Main content
 col1, col2 = st.columns([1, 2])
 
 with col1:
@@ -120,11 +111,10 @@ with col1:
 with col2:
     st.header("Model Insights")
     
-    # Feature importance plot
     st.subheader("Feature Importance")
     if hasattr(model, 'coef_'):
         importance = pd.Series(np.abs(model.coef_[0]), index=input_df['Feature'])
-    else:  # Random Forest
+    else:
         importance = pd.Series(model.feature_importances_, index=input_df['Feature'])
 
     fig, ax = plt.subplots(figsize=(10, 6))
@@ -133,7 +123,6 @@ with col2:
     plt.xlabel('Importance Score')
     st.pyplot(fig)
     
-    # Glucose vs BMI scatter plot
     st.subheader("Glucose vs BMI Analysis")
     fig2 = plt.figure(figsize=(10, 6))
 
@@ -151,9 +140,5 @@ with col2:
     plt.axhline(y=bmi, color='r', linestyle='--')
     plt.title('Glucose vs BMI with Patient Position')
     st.pyplot(fig2)
-
-# Footer
 st.markdown("---")
 st.caption("Model trained on PIMA Indian Diabetes Dataset | Accuracy: 77-80%")
-
-# Run with: streamlit run app.py
