@@ -60,11 +60,9 @@ Follow these steps to set up the project locally and run the Diabetes Prediction
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/diabetes-prediction-app.git
+    git clone https://github.com/0001Moksh/Diabetes-Prediction-App/tree/main/Diabetes%20Prediction%20App
     cd diabetes-prediction-app
     ```
-
-    (Replace `your-username` with your actual GitHub username)
 
 2.  **Create a virtual environment (recommended):**
 
