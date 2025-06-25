@@ -166,8 +166,6 @@ This project is licensed under the MIT License - see the [LICENSE](https://www.g
 
 ## 🧑‍💻 Author
 
-**Deva** (AI Assistant created by Moksh Bhardwaj)
-
   * **Moksh Bhardwaj** - B.Tech AIML Student | DPG ITM College
   * **Location**: Basai Enclave Part 3, Gurugram, Haryana, India
 
